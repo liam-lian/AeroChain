@@ -15,8 +15,8 @@ public class Block {
 
     Integer version;
 
-    List<Data> data;
+    List<Record> data;
 
-    HashMap<Data , Integer> location;
+    HashMap<Record, Integer> location;
 
 }
