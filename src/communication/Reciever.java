@@ -15,7 +15,7 @@ public class Reciever {
             e.printStackTrace();
         }
         String recvStr = new String(recvPacket.getData() , 0 , recvPacket.getLength());
-        Padding.reslove(recvStr);
+        Resolver.resolve(recvStr);
     }
 
     public static void init(){

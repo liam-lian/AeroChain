@@ -6,7 +6,7 @@ import java.net.*;
 
 public class Sender {
 
-    private void sendData(String data){
+    public static void sendData(String data){
         DatagramSocket client = null;
         try {
             client = new DatagramSocket();
@@ -15,17 +15,20 @@ public class Sender {
         }
         byte[] sendBuf;
         sendBuf = data.getBytes();
-        InetAddress addr = null;
-        try {
-            addr = InetAddress.getByName("127.0.0.1");
-        } catch (UnknownHostException e) {
-            e.printStackTrace();
+        for (String ip : IpAddress.address){
+            InetAddress addr = null;
+            try {
+                addr = InetAddress.getByName(ip);
+            } catch (UnknownHostException e) {
+                e.printStackTrace();
+            }
+            DatagramPacket sendPacket = new DatagramPacket(sendBuf ,sendBuf.length , addr , Constant.POTR);
+            try {
+                client.send(sendPacket);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
-        DatagramPacket sendPacket = new DatagramPacket(sendBuf ,sendBuf.length , addr , Constant.POTR);
-        try {
-            client.send(sendPacket);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
     }
 }
