@@ -1,10 +1,14 @@
 package init;
 
 import communication.Reciever;
+import communication.Sender;
 
 public class Initial {
     public static void init(){
         Reciever.init();
-        while (true) Reciever.receive();
+        Thread recieveThread = new Thread(new Reciever());
+        recieveThread.start();
+        Thread senderThread = new Thread(new Sender());
+        senderThread.start();
     }
 }

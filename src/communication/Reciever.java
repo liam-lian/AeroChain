@@ -3,19 +3,21 @@ package communication;
 import java.io.IOException;
 import java.net.*;
 
-public class Reciever {
+public class Reciever implements Runnable {
     private volatile static DatagramSocket server;
 
-    public static void receive(){
-        byte[] recvBuf = new byte[100];
-        DatagramPacket recvPacket = new DatagramPacket(recvBuf , recvBuf.length);
-        try {
-            server.receive(recvPacket);
-        }catch (IOException e){
-            e.printStackTrace();
+    public void run(){
+        while (true){
+            byte[] recvBuf = new byte[100];
+            DatagramPacket recvPacket = new DatagramPacket(recvBuf , recvBuf.length);
+            try {
+                server.receive(recvPacket);
+            }catch (IOException e){
+                e.printStackTrace();
+            }
+            String recvStr = new String(recvPacket.getData() , 0 , recvPacket.getLength());
+            Resolver.resolve(recvStr);
         }
-        String recvStr = new String(recvPacket.getData() , 0 , recvPacket.getLength());
-        Resolver.resolve(recvStr);
     }
 
     public static void init(){

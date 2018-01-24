@@ -1,10 +1,21 @@
 package communication;
 
+import buffer.BufferPool;
 import constant.Constant;
 import java.io.IOException;
 import java.net.*;
 
-public class Sender {
+public class Sender implements Runnable{
+    public void run(){
+        while (true){
+            try {
+                Thread.sleep(6000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            Sender.sendData(BufferPool.generateBlock());
+        }
+    }
 
     public static void sendData(String data){
         DatagramSocket client = null;

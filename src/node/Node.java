@@ -12,13 +12,6 @@ public class Node {
 
     public static void main(String[] args) {
         Initial.init();
-        while (true){
-            try {
-                Thread.sleep(6000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            Sender.sendData(BufferPool.generateBlock());
-        }
+
     }
 }
