@@ -6,10 +6,11 @@ import buffer.BufferPool;
 
 public class Resolver {
     public static void resolve(String data){
-        Block block = JSON.parseObject(data , Block.class);
-        if (block instanceof Block){
+        if (data.startsWith("Block")){
+            Block block = JSON.parseObject(data , Block.class);
             resolveBlock(block , data);
-        }else {
+        }
+        else {
             resolveRecord(data);
         }
     }

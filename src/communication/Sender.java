@@ -10,6 +10,7 @@ public class Sender implements Runnable{
         while (true){
             try {
                 Thread.sleep(6000);
+                System.out.println("send");
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -40,6 +41,5 @@ public class Sender implements Runnable{
                 e.printStackTrace();
             }
         }
-
     }
 }

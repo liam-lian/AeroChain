@@ -8,6 +8,7 @@ public class BufferPool {
 
     public static String generateBlock(){
         StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("test");
         for (int i = 0 ; i < bufferPool.size() ; i++){
             stringBuilder.append(bufferPool.get(i));
         }
