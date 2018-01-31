@@ -2,19 +2,20 @@ package communication;
 
 import buffer.BufferPool;
 import constant.Constant;
+import node.Node;
+
 import java.io.IOException;
 import java.net.*;
 
 public class Sender implements Runnable{
     public void run(){
-        while (true){
+        while (Node.switcher){
             try {
                 Thread.sleep(6000);
-                System.out.println("send");
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            Sender.sendData(BufferPool.generateBlock());
+            Sender.sendData(BufferPool.generateBlockRecord());
         }
     }
 
@@ -36,6 +37,7 @@ public class Sender implements Runnable{
             }
             DatagramPacket sendPacket = new DatagramPacket(sendBuf ,sendBuf.length , addr , Constant.POTR);
             try {
+                assert client != null;
                 client.send(sendPacket);
             } catch (IOException e) {
                 e.printStackTrace();

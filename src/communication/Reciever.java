@@ -1,5 +1,7 @@
 package communication;
 
+import node.Node;
+
 import java.io.IOException;
 import java.net.*;
 
@@ -7,7 +9,7 @@ public class Reciever implements Runnable {
     private volatile static DatagramSocket server;
 
     public void run(){
-        while (true){
+        while (Node.switcher){
             byte[] recvBuf = new byte[100];
             DatagramPacket recvPacket = new DatagramPacket(recvBuf , recvBuf.length);
             try {
