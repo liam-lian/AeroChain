@@ -11,20 +11,32 @@ public class Block {
 
     String prevHash;
 
-    Integer primary;
+    String primary;
 
     Date timeStamp;
 
-    Integer version;
+    String version;
 
     List<Record> data;
 
-    public Block(String merkleRoot, String prevHash, Integer primary, Date timeStamp, Integer version, List<Record> data) {
+    public Block(String merkleRoot, String prevHash, String primary, Date timeStamp, String version, List<Record> data) {
         this.merkleRoot = merkleRoot;
         this.prevHash = prevHash;
         this.primary = primary;
         this.timeStamp = timeStamp;
         this.version = version;
         this.data = data;
+    }
+
+    @Override
+    public String toString() {
+        return "Block{" +
+                "merkleRoot='" + merkleRoot + '\'' +
+                ", prevHash='" + prevHash + '\'' +
+                ", primary=" + primary +
+                ", timeStamp=" + timeStamp +
+                ", version=" + version +
+                ", data=" + data +
+                '}';
     }
 }

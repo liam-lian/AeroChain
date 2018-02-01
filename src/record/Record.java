@@ -6,4 +6,11 @@ public class Record {
     public Record(String data){
         this.data = data;
     }
+
+    @Override
+    public String toString() {
+        return "Record{" +
+                "data='" + data + '\'' +
+                '}';
+    }
 }

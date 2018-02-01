@@ -15,15 +15,35 @@ import java.util.concurrent.Executors;
 public class Node {
     public static boolean switcher = true;
 
-    String id;
+    private static String id;
 
-    List<Block> blockChain = new ArrayList<>();
+    private static List<Block> blockChain = new ArrayList<>();
 
     public static void main(String[] args) {
         Initial.init();
         ExecutorService executorService = Executors.newCachedThreadPool();
         executorService.execute(new Reciever());
-        executorService.execute(new Sender());
         executorService.execute(new Simulator());
+        executorService.execute(new generateBlock());
+    }
+
+    public static String getId() {
+        return id;
+    }
+
+    public static void setId(String id) {
+        id = id;
+    }
+
+    public static List<Block> getBlockChain() {
+        return blockChain;
+    }
+
+    public static void setBlockChain(List<Block> newBlockChain) {
+        blockChain = newBlockChain;
+    }
+
+    public static void addBlock(Block block){
+        blockChain.add(block);
     }
 }

@@ -7,18 +7,7 @@ import node.Node;
 import java.io.IOException;
 import java.net.*;
 
-public class Sender implements Runnable{
-    public void run(){
-        while (Node.switcher){
-            try {
-                Thread.sleep(6000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            Sender.sendData(BufferPool.generateBlockRecord());
-        }
-    }
-
+public class Sender{
     public static void sendData(String data){
         DatagramSocket client = null;
         try {
