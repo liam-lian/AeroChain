@@ -10,7 +10,7 @@ public class Reciever implements Runnable {
 
     public void run(){
         while (Node.switcher){
-            byte[] recvBuf = new byte[100];
+            byte[] recvBuf = new byte[200];
             DatagramPacket recvPacket = new DatagramPacket(recvBuf , recvBuf.length);
             try {
                 server.receive(recvPacket);
@@ -18,6 +18,7 @@ public class Reciever implements Runnable {
                 e.printStackTrace();
             }
             String recvStr = new String(recvPacket.getData() , 0 , recvPacket.getLength());
+            System.out.println(recvStr);
             Resolver.resolve(recvStr);
         }
     }

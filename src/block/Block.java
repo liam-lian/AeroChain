@@ -7,17 +7,17 @@ import java.util.HashMap;
 import java.util.List;
 
 public class Block {
-    String merkleRoot;
+    private String merkleRoot;
 
-    String prevHash;
+    private String prevHash;
 
-    String primary;
+    private String primary;
 
-    Date timeStamp;
+    private Date timeStamp;
 
-    String version;
+    private String version;
 
-    List<Record> data;
+    private List<Record> data;
 
     public Block(String merkleRoot, String prevHash, String primary, Date timeStamp, String version, List<Record> data) {
         this.merkleRoot = merkleRoot;
@@ -38,5 +38,53 @@ public class Block {
                 ", version=" + version +
                 ", data=" + data +
                 '}';
+    }
+
+    public String getMerkleRoot() {
+        return merkleRoot;
+    }
+
+    public void setMerkleRoot(String merkleRoot) {
+        this.merkleRoot = merkleRoot;
+    }
+
+    public String getPrevHash() {
+        return prevHash;
+    }
+
+    public void setPrevHash(String prevHash) {
+        this.prevHash = prevHash;
+    }
+
+    public String getPrimary() {
+        return primary;
+    }
+
+    public void setPrimary(String primary) {
+        this.primary = primary;
+    }
+
+    public Date getTimeStamp() {
+        return timeStamp;
+    }
+
+    public void setTimeStamp(Date timeStamp) {
+        this.timeStamp = timeStamp;
+    }
+
+    public String getVersion() {
+        return version;
+    }
+
+    public void setVersion(String version) {
+        this.version = version;
+    }
+
+    public List<Record> getData() {
+        return data;
+    }
+
+    public void setData(List<Record> data) {
+        this.data = data;
     }
 }

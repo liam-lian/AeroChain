@@ -21,7 +21,7 @@ public class Node {
 
     public static void main(String[] args) {
         Initial.init();
-        ExecutorService executorService = Executors.newCachedThreadPool();
+        ExecutorService executorService = Executors.newFixedThreadPool(3);
         executorService.execute(new Reciever());
         executorService.execute(new Simulator());
         executorService.execute(new generateBlock());
