@@ -1,13 +1,12 @@
 package node;
 
-import block.Block;
-import block.Hash;
+import model.block.Block;
+import util.hash.Hash;
 import buffer.BufferPool;
 import com.alibaba.fastjson.JSON;
 import communication.Sender;
 import constant.Constant;
-import record.Record;
-
+import model.record.Record;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;

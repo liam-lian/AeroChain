@@ -1,25 +1,25 @@
 package node;
 
-import block.Block;
+import com.alibaba.fastjson.JSON;
+import model.block.Block;
 import communication.Reciever;
-import communication.Sender;
 import init.Initial;
-import simulator.Simulator;
+import util.simulator.Simulator;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class Node {
     public static boolean switcher = true;
 
-    private static String id;
+    private static String id = "id";
 
     private static List<Block> blockChain = new ArrayList<>();
 
     public static void main(String[] args) {
+//        JSON.parseObject("{\"data\":[{},{},{},{},{}],\"merkleRoot\":\"root\",\"prevHash\":\"non\",\"primary\":\"id\",\"timeStamp\":1519394068815,\"version\":\"version_0\"}" , Block.class);
         Initial.init();
         ExecutorService executorService = Executors.newFixedThreadPool(3);
         executorService.execute(new Reciever());

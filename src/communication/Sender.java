@@ -1,9 +1,7 @@
 package communication;
 
-import buffer.BufferPool;
 import constant.Constant;
-import node.Node;
-
+import constant.IpAddress;
 import java.io.IOException;
 import java.net.*;
 
@@ -15,8 +13,7 @@ public class Sender{
         } catch (SocketException e) {
             e.printStackTrace();
         }
-        byte[] sendBuf;
-        sendBuf = data.getBytes();
+        byte[] sendBuf = data.getBytes();
         for (String ip : IpAddress.address){
             InetAddress addr = null;
             try {

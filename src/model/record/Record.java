@@ -1,4 +1,4 @@
-package record;
+package model.record;
 
 public class Record {
     private String data;
@@ -12,5 +12,15 @@ public class Record {
         return "Record{" +
                 "data='" + data + '\'' +
                 '}';
+    }
+
+    public Record(){}
+
+    public String getData() {
+        return data;
+    }
+
+    public void setData(String data) {
+        this.data = data;
     }
 }

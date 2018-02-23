@@ -1,9 +1,8 @@
-package block;
+package model.block;
 
-import record.Record;
+import model.record.Record;
 
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 
 public class Block {
@@ -27,6 +26,9 @@ public class Block {
         this.version = version;
         this.data = data;
     }
+
+    public Block(){}
+
 
     @Override
     public String toString() {

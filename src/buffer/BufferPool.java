@@ -1,6 +1,6 @@
 package buffer;
 
-import record.Record;
+import model.record.Record;
 
 import java.util.ArrayList;
 import java.util.List;

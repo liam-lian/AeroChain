@@ -1,6 +1,7 @@
 package communication;
 
 import node.Node;
+import node.Resolver;
 
 import java.io.IOException;
 import java.net.*;
@@ -10,7 +11,7 @@ public class Reciever implements Runnable {
 
     public void run(){
         while (Node.switcher){
-            byte[] recvBuf = new byte[200];
+            byte[] recvBuf = new byte[8192];
             DatagramPacket recvPacket = new DatagramPacket(recvBuf , recvBuf.length);
             try {
                 server.receive(recvPacket);
@@ -18,7 +19,6 @@ public class Reciever implements Runnable {
                 e.printStackTrace();
             }
             String recvStr = new String(recvPacket.getData() , 0 , recvPacket.getLength());
-            System.out.println(recvStr);
             Resolver.resolve(recvStr);
         }
     }

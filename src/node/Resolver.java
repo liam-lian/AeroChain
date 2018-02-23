@@ -1,9 +1,8 @@
-package communication;
+package node;
 
-import block.Block;
 import com.alibaba.fastjson.JSON;
+import model.block.Block;
 import buffer.BufferPool;
-import node.Node;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -19,7 +18,7 @@ public class Resolver {
     }
 
     private static Block resolveBlock(String data){
-        return new Block("root" , "non" , "null" , new Date() , "0" , new ArrayList<>());
+        return JSON.parseObject(data , Block.class);
     }
 
     private static void resolveRecord(String data){

@@ -1,6 +1,6 @@
-package simulator;
+package util.simulator;
 
-import record.Record;
+import model.record.Record;
 import communication.Sender;
 
 import java.util.Date;
