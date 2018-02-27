@@ -1,12 +1,12 @@
 package communication;
 
 import constant.Constant;
-import constant.IpAddress;
+
 import java.io.IOException;
 import java.net.*;
 
 public class Sender{
-    public static void sendData(String data){
+    public static void sendData(String data , String ip){
         DatagramSocket client = null;
         try {
             client = new DatagramSocket();
@@ -14,7 +14,6 @@ public class Sender{
             e.printStackTrace();
         }
         byte[] sendBuf = data.getBytes();
-        for (String ip : IpAddress.address){
             InetAddress addr = null;
             try {
                 addr = InetAddress.getByName(ip);
@@ -28,6 +27,11 @@ public class Sender{
             } catch (IOException e) {
                 e.printStackTrace();
             }
+    }
+
+    public static void broadcast(String data){
+        for(String ip : Constant.address){
+            sendData(data , ip);
         }
     }
 }

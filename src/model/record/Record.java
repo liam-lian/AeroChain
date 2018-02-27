@@ -7,14 +7,14 @@ public class Record {
         this.data = data;
     }
 
+    public Record(){}
+    
     @Override
     public String toString() {
         return "Record{" +
                 "data='" + data + '\'' +
                 '}';
     }
-
-    public Record(){}
 
     public String getData() {
         return data;

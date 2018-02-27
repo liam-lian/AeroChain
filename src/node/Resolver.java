@@ -1,27 +1,27 @@
 package node;
 
-import com.alibaba.fastjson.JSON;
-import model.block.Block;
+import consensus.checkpoint.Checkpoint;
+import consensus.mainStream.PrePrepare;
+import consensus.mainStream.Prepare;
 import buffer.BufferPool;
-
-import java.util.ArrayList;
-import java.util.Date;
+import consensus.synchronize.Synchronize;
 
 public class Resolver {
     public static void resolve(String data){
-        if (!data.startsWith("Record")){
-            Node.addBlock(resolveBlock(data));
+        if (data.startsWith("<pre-prepare"))
+            PrePrepare.process(data);
+        if (data.startsWith("<prepare"))
+            Prepare.process(data);
+        if (data.startsWith("<checkpoint"))
+            Checkpoint.process(data);
+        if (data.startsWith("<synchrony"))
+            Synchronize.process(data);
+        if (data.startsWith("<synchronized"))
+            Synchronize.synchronize(data);
+        if (data.startsWith("<join"))
+            SignU
+        if (data.startsWith("Record")){
+            BufferPool.add(data);
         }
-        else {
-            resolveRecord(data);
-        }
-    }
-
-    private static Block resolveBlock(String data){
-        return JSON.parseObject(data , Block.class);
-    }
-
-    private static void resolveRecord(String data){
-        BufferPool.add(data);
     }
 }

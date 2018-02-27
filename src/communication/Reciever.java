@@ -10,7 +10,7 @@ public class Reciever implements Runnable {
     private volatile static DatagramSocket server;
 
     public void run(){
-        while (Node.switcher){
+        while (true){
             byte[] recvBuf = new byte[8192];
             DatagramPacket recvPacket = new DatagramPacket(recvBuf , recvBuf.length);
             try {

@@ -16,19 +16,21 @@ public class Block {
 
     private String version;
 
+    private int index;
+
     private List<Record> data;
 
-    public Block(String merkleRoot, String prevHash, String primary, Date timeStamp, String version, List<Record> data) {
+    public Block(String merkleRoot, String prevHash, String primary, Date timeStamp, String version, List<Record> data , int index) {
         this.merkleRoot = merkleRoot;
         this.prevHash = prevHash;
         this.primary = primary;
         this.timeStamp = timeStamp;
         this.version = version;
         this.data = data;
+        this.index = index;
     }
 
     public Block(){}
-
 
     @Override
     public String toString() {
@@ -40,6 +42,14 @@ public class Block {
                 ", version=" + version +
                 ", data=" + data +
                 '}';
+    }
+
+    public int getIndex() {
+        return index;
+    }
+
+    public void setIndex(int index) {
+        this.index = index;
     }
 
     public String getMerkleRoot() {
