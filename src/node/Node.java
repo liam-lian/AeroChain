@@ -1,12 +1,12 @@
 package node;
 
-import consensus.signUp.signUp;
+import consensus.mainStream.Prepared;
+import consensus.signUp.SignUp;
 import model.block.Block;
 import communication.Reciever;
 import init.Initial;
 import util.hash.Hash;
 import util.simulator.Simulator;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -28,12 +28,17 @@ public class Node {
 
     private static String nodeNums;
 
+    private static String faultyNodeNums;
+
+    private static int threshold;
+
     public static void main(String[] args) throws IOException {
         Initial.init();
-        ExecutorService executorService = Executors.newFixedThreadPool(3);
+        ExecutorService executorService = Executors.newFixedThreadPool(4);
         executorService.execute(new Reciever());
         executorService.execute(new Simulator());
         executorService.execute(new GenerateBlock());
+        executorService.execute(new Prepared());
         while (true){
             BufferedReader stdin = new BufferedReader(new InputStreamReader(System.in));
             String input;
@@ -41,7 +46,9 @@ public class Node {
                 if (input.equals("show"))
                     System.out.println(blockChain);
                 if (input.equals("signUp"))
-                    signUp.generate();
+                    SignUp.generate();
+                if (input.startsWith("f:"))
+                    setFaultyNodeNums(input.replace("f:" , ""));
                 if (input.equals("exit")){
                     Reciever.clean();
                     executorService.shutdown();
@@ -49,6 +56,13 @@ public class Node {
                 }
             }
         }
+    }
+
+    public static boolean isPrimary(){
+        int view = Integer.valueOf(Node.getView());
+        int id = Integer.valueOf(Node.getId());
+        int n = Integer.valueOf(Node.getNodeNums());
+        return id == view % n;
     }
 
     public static String getLatestHash(){
@@ -61,6 +75,22 @@ public class Node {
 
     public static void addBlock(Block block){
         blockChain.add(block);
+    }
+
+    public static String getFaultyNodeNums() {
+        return faultyNodeNums;
+    }
+
+    public static void setFaultyNodeNums(String faultyNodeNums) {
+        Node.faultyNodeNums = faultyNodeNums;
+    }
+
+    public static int getThreshold() {
+        return threshold;
+    }
+
+    public static void setThreshold(int threshold) {
+        Node.threshold = threshold;
     }
 
     public static boolean isSwitcher() {

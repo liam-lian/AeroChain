@@ -10,6 +10,7 @@ import util.Log;
 import util.hash.Hash;
 
 public class PrePrepare {
+    private static Block block;
 
     private static final int view = 2;
 
@@ -17,7 +18,9 @@ public class PrePrepare {
 
     private static final int blockData = 4;
 
-    private static final int digest = 5;
+    private static final int blockDigest = 5;
+
+    private static String digest;
 
     public static void generate(String block){
         StringBuilder stringBuilder = new StringBuilder();
@@ -28,15 +31,22 @@ public class PrePrepare {
         stringBuilder.append(block).append(",");
         stringBuilder.append(Hash.hash(block)).append(">");
         Sender.broadcast(stringBuilder.toString());
+        Node.setThreshold(threshold());
+    }
+
+    private static int threshold(){
+        int n = Integer.valueOf(Node.getNodeNums());
+        int f = Integer.valueOf(Node.getFaultyNodeNums());
+        return (int) Math.ceil((n - f) / 2) + f + ((n - f ) % 2 == 0 ? 1 : 0);
     }
 
     public static void process(String prePrepare){
         String[] strings = prePrepare.split(",");
-        Block block = JSON.parseObject(strings[blockData] , Block.class);
-        if (Node.getView().equals(strings[view]) && Node.getBlockChain().size() == Integer.valueOf(strings[height])
-                && strings[digest].equals(Hash.hash(block.toString())) && isValid(block)){
-            Sender.sendData(Prepare.generate(strings));
-            Log.log(prePrepare , "C:\\Users\\DSY\\blockchain\\log\\prePrepareLog");
+        block = JSON.parseObject(strings[blockData] , Block.class);
+        if (Node.getView().equals(strings[view]) && (Node.getBlockChainHeight() + 1) == Integer.valueOf(strings[height]) && isValid(block)){
+            Prepare.generate(strings);
+            setDigest(strings[blockDigest]);
+            Log.log(prePrepare , "prePrepareLog");
         }
     }
 
@@ -45,7 +55,18 @@ public class PrePrepare {
             if (!BufferPool.isContain(record))
                 return false;
         }
-        return true;
+        return block.getPrevHash().equals(Node.getLatestHash());
     }
 
+    public static String getDigest() {
+        return digest;
+    }
+
+    public static void setDigest(String digest) {
+        PrePrepare.digest = digest;
+    }
+
+    public static Block getBlock() {
+        return block;
+    }
 }

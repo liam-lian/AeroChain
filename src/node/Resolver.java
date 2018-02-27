@@ -4,6 +4,7 @@ import consensus.checkpoint.Checkpoint;
 import consensus.mainStream.PrePrepare;
 import consensus.mainStream.Prepare;
 import buffer.BufferPool;
+import consensus.signUp.SignUp;
 import consensus.synchronize.Synchronize;
 
 public class Resolver {
@@ -19,7 +20,9 @@ public class Resolver {
         if (data.startsWith("<synchronized"))
             Synchronize.synchronize(data);
         if (data.startsWith("<join"))
-            SignU
+            SignUp.process(data);
+        if (data.startsWith("<approve"))
+            SignUp.approve(data);
         if (data.startsWith("Record")){
             BufferPool.add(data);
         }

@@ -11,7 +11,7 @@ public class SignUp {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("<join").append(",");
         stringBuilder.append(selfIntroduction()).append(">");
-        Sender.sendData(stringBuilder.toString());
+        Sender.broadcast(stringBuilder.toString());
     }
 
     public static void process(String data){
@@ -23,12 +23,12 @@ public class SignUp {
             stringBuilder.append(strings[selfIntroduction]).append(",");
             stringBuilder.append(Node.getNodeNums() + 1).append(">");
             Node.setNodeNums(Integer.toString(Integer.valueOf(Node.getNodeNums()) + 1));
-            Sender.sendData(stringBuilder.toString());
+            Sender.broadcast(stringBuilder.toString());
         }
     }
 
     private static boolean isMatching(String selfIndroduction){
-
+        return true;
     }
 
     public static void approve(String data){
@@ -36,6 +36,6 @@ public class SignUp {
     }
 
     private static String selfIntroduction(){
-
+        return "self_introduction";
     }
 }
