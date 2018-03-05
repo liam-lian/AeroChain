@@ -12,6 +12,8 @@ public class Constant {
 
     public static final int BLOCK_GAP = 60;
 
+    public static final String SEPARTOR = "- - - - - - - - - -";
+
     public static List<String> address = new ArrayList<>();
     static {
         address.add("127.0.0.1");

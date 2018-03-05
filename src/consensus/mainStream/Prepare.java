@@ -1,6 +1,7 @@
 package consensus.mainStream;
 
 import communication.Sender;
+import constant.Constant;
 import node.Node;
 import util.Log;
 
@@ -27,9 +28,11 @@ public class Prepare {
         }
     }
 
-    public static void process(String prepare){
+    public synchronized static void process(String prepare){
         String[] strings = prepare.split(",");
         if (strings[view].equals(Node.getView()) && Integer.valueOf(strings[height]) == (Node.getBlockChainHeight() + 1) && strings[prepareDigest].equals(PrePrepare.getDigest())) {
+            if (validPrepare == 0)
+                Log.log(Constant.SEPARTOR, "prepareLog");
             validPrepare++;
             Log.log(prepare, "prepareLog");
         }
@@ -37,5 +40,9 @@ public class Prepare {
 
     public static int getValidPrepare() {
         return validPrepare;
+    }
+
+    public synchronized static void setValidPrepare(int validPrepare) {
+        Prepare.validPrepare = validPrepare;
     }
 }

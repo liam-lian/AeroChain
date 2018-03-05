@@ -10,6 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import static consensus.checkpoint.Checkpoint.isValidCheckpoint;
+import static consensus.mainStream.Prepared.isValidBlock;
+
 public class Synchronize {
     private static final int checkpointProofs = 3;
 
@@ -45,12 +48,12 @@ public class Synchronize {
         String[] strings = data.split(",");
         int checkpoint = Integer.valueOf(strings[Synchronize.checkpoint]);
         String checkpointProof = strings[checkpointProofs];
-        List<Block> blockchain;
-        List<Set<String>> blockProof;
-        if (isValidCheckpoint(checkpoint , checkpointProof) && isValidBlock(blockchain , blockProof)){
+        List<Block> blockchain = null;
+        List<List<String>> blockProof = null;
+        if (isValidCheckpoint(checkpoint , checkpointProof) && isValidBlock(checkpoint , blockchain , blockProof)){
             Node.setBlockChain(blockchain);
             for (Block block : Node.getTmpBlocks()){
-                if ()
+//                if ()
             }
             Node.setSwitcher(true);
         }

@@ -3,6 +3,7 @@ package consensus.viewChange;
 import communication.Sender;
 import consensus.checkpoint.Checkpoint;
 import consensus.mainStream.Prepared;
+import model.block.Block;
 import node.Node;
 import node.Resolver;
 
@@ -17,6 +18,8 @@ public class ViewChange {
     private static List<String> viewChangeProofs = new ArrayList<>();
 
     private static final int newView = 1;
+
+    private static final int view = 2;
 
     private static final int checkpointProof = 3;
 
@@ -38,7 +41,10 @@ public class ViewChange {
         viewChangeProofs.add(data);
         String[] strings = data.split(",");
         if (strings[newView].equals(Node.getId())){
-            if (Checkpoint.isValidCheckpoint() && Prepared.isValidBlock()){
+            int checkpoint = Integer.valueOf(strings[2]);
+            List<Block> blockchain = null;
+            List<List<String>> proof = null;
+            if (Checkpoint.isValidCheckpoint(checkpoint , strings[3]) && Prepared.isValidBlock(checkpoint , blockchain , proof)){
                 String signature = strings[checkpointProof] + strings[blockProof];
                 map.putIfAbsent(signature , 0);
                 map.put(signature , map.get(signature) + 1);

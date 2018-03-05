@@ -5,7 +5,11 @@ import consensus.viewChange.ViewChange;
 import constant.Constant;
 import model.block.Block;
 import node.Node;
+import util.Log;
 
+import java.io.BufferedReader;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
@@ -18,6 +22,7 @@ public class Prepared implements Runnable {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        Prepare.setValidPrepare(0);
         if (Prepare.getValidPrepare() >= Node.getThreshold()){
             if (Node.isSwitcher())
                 Node.getBlockChain().add(PrePrepare.getBlock());
@@ -31,11 +36,13 @@ public class Prepared implements Runnable {
         }
     }
 
-    public static List<Set<String>> getPreparedProofsAfterCheckpoint(){
+    public static List<List<String>> getPreparedProofsAfterCheckpoint(){
+        List<List<String>> result = new ArrayList<>();
 
+        return result;
     }
 
-    public static boolean isValidBlock(List<Block> blockchain , List<Set<String>> proof){
-
+    public static boolean isValidBlock(int checkpoint , List<Block> blockchain , List<List<String>> proof){
+        return true;
     }
 }
