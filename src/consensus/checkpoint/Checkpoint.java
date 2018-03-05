@@ -5,6 +5,8 @@ import node.Node;
 import util.Log;
 import util.hash.Hash;
 
+import java.util.List;
+
 public class Checkpoint {
     public static void generate(){
         StringBuilder stringBuilder = new StringBuilder();
@@ -13,7 +15,7 @@ public class Checkpoint {
         stringBuilder.append(Hash.hash(Node.getBlockChain().get(Node.getBlockChain().size() - 1).toString())).append(",");
         stringBuilder.append(Node.getId()).append(",");
         stringBuilder.append(Node.getView());
-        Sender.sendData(stringBuilder.toString());
+        Sender.broadcast(stringBuilder.toString());
         Log.log(stringBuilder.toString() , "checkpoint");
     }
 
@@ -25,6 +27,18 @@ public class Checkpoint {
     }
 
     private static boolean isMatching(String data){
+
+    }
+
+    public static int getLatestCheckpoint(){
+
+    }
+
+    public static List<String> getCheckpointProofs(){
+
+    }
+
+    public static boolean isValidCheckpoint(int checkpoint , String proof){
 
     }
 }

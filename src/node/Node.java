@@ -32,6 +32,8 @@ public class Node {
 
     private static int threshold;
 
+    private static List<Block> tmpBlocks;
+
     public static void main(String[] args) throws IOException {
         Initial.init();
         ExecutorService executorService = Executors.newFixedThreadPool(4);
@@ -75,6 +77,14 @@ public class Node {
 
     public static void addBlock(Block block){
         blockChain.add(block);
+    }
+
+    public static List<Block> getTmpBlocks() {
+        return tmpBlocks;
+    }
+
+    public static void setTmpBlocks(List<Block> tmpBlocks) {
+        Node.tmpBlocks = tmpBlocks;
     }
 
     public static String getFaultyNodeNums() {

@@ -43,10 +43,10 @@ public class PrePrepare {
     public static void process(String prePrepare){
         String[] strings = prePrepare.split(",");
         block = JSON.parseObject(strings[blockData] , Block.class);
+        setDigest(strings[blockDigest]);
+        Log.log(prePrepare , "prePrepareLog");
         if (Node.getView().equals(strings[view]) && (Node.getBlockChainHeight() + 1) == Integer.valueOf(strings[height]) && isValid(block)){
             Prepare.generate(strings);
-            setDigest(strings[blockDigest]);
-            Log.log(prePrepare , "prePrepareLog");
         }
     }
 

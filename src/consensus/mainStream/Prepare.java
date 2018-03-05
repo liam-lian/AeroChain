@@ -16,13 +16,15 @@ public class Prepare {
     private static int validPrepare;
 
     public static void generate(String[] prePrepare){
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("<prepare").append(",");
-        stringBuilder.append(Node.getId()).append(",");
-        stringBuilder.append(prePrepare[view]).append(",");
-        stringBuilder.append(prePrepare[height]).append(",");
-        stringBuilder.append(prePrepare[prePrepareDigest]).append(">");
-        Sender.broadcast(stringBuilder.toString());
+        if (Node.isSwitcher()){
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.append("<prepare").append(",");
+            stringBuilder.append(Node.getId()).append(",");
+            stringBuilder.append(prePrepare[view]).append(",");
+            stringBuilder.append(prePrepare[height]).append(",");
+            stringBuilder.append(prePrepare[prePrepareDigest]).append(">");
+            Sender.broadcast(stringBuilder.toString());
+        }
     }
 
     public static void process(String prepare){
