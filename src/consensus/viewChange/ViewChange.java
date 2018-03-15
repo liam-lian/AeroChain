@@ -2,7 +2,7 @@ package consensus.viewChange;
 
 import communication.Sender;
 import consensus.checkpoint.Checkpoint;
-import consensus.mainStream.Prepared;
+import consensus.mainStream.prepared.Prepared;
 import model.block.Block;
 import node.Node;
 import node.Resolver;

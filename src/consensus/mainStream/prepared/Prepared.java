@@ -1,17 +1,14 @@
-package consensus.mainStream;
+package consensus.mainStream.prepared;
 
 import consensus.checkpoint.Checkpoint;
-import consensus.viewChange.ViewChange;
+import consensus.mainStream.prePrepare.PrePrepare;
+import consensus.mainStream.prepare.Prepare;
 import constant.Constant;
 import model.block.Block;
 import node.Node;
-import util.Log;
 
-import java.io.BufferedReader;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 public class Prepared implements Runnable {
@@ -32,7 +29,7 @@ public class Prepared implements Runnable {
                 Checkpoint.generate();
             }
         }else {
-            ViewChange.generate();
+//            ViewChange.generate();
         }
     }
 

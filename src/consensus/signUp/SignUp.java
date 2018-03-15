@@ -15,6 +15,7 @@ public class SignUp {
     }
 
     public static void process(String data){
+        data = data.replaceAll(">" , "");
         String[] strings = data.split(",");
         if (isMatching(strings[selfIntroduction])){
             StringBuilder stringBuilder = new StringBuilder();
@@ -22,7 +23,7 @@ public class SignUp {
             stringBuilder.append(Node.getId()).append(",");
             stringBuilder.append(strings[selfIntroduction]).append(",");
             stringBuilder.append(Node.getNodeNums() + 1).append(">");
-            Node.setNodeNums(Integer.toString(Integer.valueOf(Node.getNodeNums()) + 1));
+            Node.setNodeNums(Node.getNodeNums() + 1);
             Sender.broadcast(stringBuilder.toString());
         }
     }

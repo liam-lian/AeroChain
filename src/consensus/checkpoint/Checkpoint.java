@@ -5,7 +5,6 @@ import node.Node;
 import util.Log;
 import util.hash.Hash;
 
-import java.io.StringReader;
 import java.util.List;
 
 public class Checkpoint {

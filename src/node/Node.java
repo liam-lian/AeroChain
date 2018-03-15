@@ -1,6 +1,6 @@
 package node;
 
-import consensus.mainStream.Prepared;
+import consensus.mainStream.prepared.Prepared;
 import consensus.signUp.SignUp;
 import model.block.Block;
 import communication.Reciever;
@@ -10,27 +10,32 @@ import util.simulator.Simulator;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+/**
+ * Created by DSY on 2018/3/15.
+ * 区块链节点编号从1开始
+ */
+
 public class Node {
+    //判断节点当前的工作状态，是否需要对外发送prepare消息
     private static boolean switcher = true;
 
     private static List<Block> blockChain = new ArrayList<>();
 
-    private static final String id = "id";
+    private static int id = 1;
 
-    private static String primary;
+    private static int primary = 1;
 
-    private static String view;
+    private static int view = 1;
 
-    private static String nodeNums;
+    private static int nodeNums = 4;
 
-    private static String faultyNodeNums;
+    private static String faultyNodeNums = "1";
 
-    private static int threshold;
+    private static int threshold = Integer.MAX_VALUE;
 
     private static List<Block> tmpBlocks;
 
@@ -68,6 +73,7 @@ public class Node {
     }
 
     public static String getLatestHash(){
+        if (blockChain.size() == 0) return "non";
         return Hash.hash(blockChain.get(blockChain.size() - 1).toString());
     }
 
@@ -111,31 +117,31 @@ public class Node {
         Node.switcher = switcher;
     }
 
-    public static String getPrimary() {
+    public static int getPrimary() {
         return primary;
     }
 
-    public static void setPrimary(String primary) {
+    public static void setPrimary(int primary) {
         Node.primary = primary;
     }
 
-    public static String getView() {
+    public static int getView() {
         return view;
     }
 
-    public static void setView(String view) {
+    public static void setView(int view) {
         Node.view = view;
     }
 
-    public static String getNodeNums() {
+    public static int getNodeNums() {
         return nodeNums;
     }
 
-    public static void setNodeNums(String nodeNums) {
+    public static void setNodeNums(int nodeNums) {
         Node.nodeNums = nodeNums;
     }
 
-    public static String getId() {
+    public static int getId() {
         return id;
     }
 

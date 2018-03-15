@@ -1,26 +1,37 @@
 package model.record;
 
-public class Record {
-    private String data;
+public class Record extends Object{
+    private String record;
 
     public Record(String data){
-        this.data = data;
+        this.record = data;
     }
 
     public Record(){}
-    
+
     @Override
     public String toString() {
         return "Record{" +
-                "data='" + data + '\'' +
+                "record='" + record + '\'' +
                 '}';
     }
 
-    public String getData() {
-        return data;
+    public String getRecord() {
+        return record;
     }
 
-    public void setData(String data) {
-        this.data = data;
+    public void setRecord(String data) {
+        this.record = data;
+    }
+
+    @Override
+    public int hashCode(){
+        return this.record.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object record){
+        Record x = (Record) record;
+        return this.record.equals(x.record);
     }
 }

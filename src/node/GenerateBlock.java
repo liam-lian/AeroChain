@@ -1,11 +1,9 @@
 package node;
 
-import consensus.mainStream.PrePrepare;
+import consensus.mainStream.prePrepare.PrePrepare;
 import model.block.Block;
-import util.hash.Hash;
 import buffer.BufferPool;
 import com.alibaba.fastjson.JSON;
-import communication.Sender;
 import constant.Constant;
 import model.record.Record;
 import java.util.Date;
@@ -25,8 +23,7 @@ public class GenerateBlock implements Runnable{
             String merkleRoot = getMerkleRoot(records);
             int currentHeight = Node.getBlockChainHeight();
             String prevHash = currentHeight == 0 ? "non" : Node.getLatestHash();
-            Block newBlock = new Block(merkleRoot , prevHash , Node.getId() , new Date() , Constant.VERSION, records , currentHeight + 1);
-            String block = JSON.toJSONString(newBlock);
+            Block block = new Block(merkleRoot , prevHash , Node.getId() , new Date() , Constant.VERSION, records , currentHeight + 1);
             PrePrepare.generate(block);
         }
     }
