@@ -9,14 +9,6 @@ import node.Node;
 import util.Log;
 
 public class Prepare {
-    private static final int view = 2;
-
-    private static final int height = 3;
-
-    private static final int prePrepareDigest = 5;
-
-    private static final int prepareDigest = 4;
-
     private static int validPrepare;
 
     public static void generate(PrePrepareModel prePrepare){

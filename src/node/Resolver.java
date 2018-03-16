@@ -28,7 +28,6 @@ public class Resolver {
                 PrepareModel model = JSON.parseObject(tmp , PrepareModel.class);
                 Prepare.process(model);
             }
-
             if (data.startsWith("<checkpoint"))
                 Checkpoint.process(data);
             if (data.startsWith("<synchrony"))

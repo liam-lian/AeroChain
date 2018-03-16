@@ -3,6 +3,7 @@ package consensus.mainStream.prepared;
 import consensus.checkpoint.Checkpoint;
 import consensus.mainStream.prePrepare.PrePrepare;
 import consensus.mainStream.prepare.Prepare;
+import consensus.viewChange.ViewChange;
 import constant.Constant;
 import model.block.Block;
 import node.Node;
@@ -19,17 +20,24 @@ public class Prepared implements Runnable {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        Prepare.setValidPrepare(0);
-        if (Prepare.getValidPrepare() >= Node.getThreshold()){
-            if (Node.isSwitcher())
-                Node.getBlockChain().add(PrePrepare.getBlock());
-            else
+        int a = Prepare.getValidPrepare();
+        int b = Node.getThreshold();
+        if (Prepare.getValidPrepare() <= Node.getThreshold()){
+            if (Node.isSwitcher()) {
+                Node.addBlock(PrePrepare.getBlock());
+                PrePrepare.setBlock(null);
+                PrePrepare.setDigest(null);
+                Prepare.setValidPrepare(0);
+            }
+            else {
+                //TODO 算法流程待处理
                 Node.getTmpBlocks().add(PrePrepare.getBlock());
+            }
             if (Node.getBlockChain().size() % Constant.CHECKPOINT == 0){
                 Checkpoint.generate();
             }
         }else {
-//            ViewChange.generate();
+            ViewChange.generate();
         }
     }
 

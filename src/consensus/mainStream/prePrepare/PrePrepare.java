@@ -38,6 +38,7 @@ public class PrePrepare {
         Log.log(prePrepare.toString() , "prePrepareLog");
         if (Node.getView() == prePrepare.view && (Node.getBlockChainHeight() + 1) == prePrepare.getHeight() && isValid(prePrepare.getBlock())){
             setDigest(prePrepare.getDigest());
+            setBlock(prePrepare.getBlock());
             Prepare.generate(prePrepare);
         }
     }
@@ -63,5 +64,9 @@ public class PrePrepare {
 
     public static Block getBlock() {
         return block;
+    }
+
+    public static void setBlock(Block block) {
+        PrePrepare.block = block;
     }
 }

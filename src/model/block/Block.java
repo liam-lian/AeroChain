@@ -10,7 +10,7 @@ public class Block {
 
     private String prevHash;
 
-    private String primary;
+    private int primary;
 
     private Date timeStamp;
 
@@ -20,7 +20,7 @@ public class Block {
 
     private List<Record> data;
 
-    public Block(String merkleRoot, String prevHash, String primary, Date timeStamp, String version, List<Record> data , int index) {
+    public Block(String merkleRoot, String prevHash, int primary, Date timeStamp, String version, List<Record> data , int index) {
         this.merkleRoot = merkleRoot;
         this.prevHash = prevHash;
         this.primary = primary;
@@ -68,11 +68,11 @@ public class Block {
         this.prevHash = prevHash;
     }
 
-    public String getPrimary() {
+    public int getPrimary() {
         return primary;
     }
 
-    public void setPrimary(String primary) {
+    public void setPrimary(int primary) {
         this.primary = primary;
     }
 
