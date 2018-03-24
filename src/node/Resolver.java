@@ -18,29 +18,29 @@ public class Resolver {
 
     public static void resolve(String data){
         if (switcher){
-            if (data.startsWith(Constant.PRE_PREPARE_TAG)) {
+            if (data.startsWith("{\"record\"")){
+                BufferPool.add(JSON.parseObject(data , Record.class));
+            }
+            else if (data.startsWith(Constant.PRE_PREPARE_TAG)) {
                 String tmp = data.replace(Constant.PRE_PREPARE_TAG , "");
                 PrePrepareModel model = JSON.parseObject(tmp , PrePrepareModel.class);
                 PrePrepare.process(model);
             }
-            if (data.startsWith(Constant.PREPARE_TAG)){
+            else if (data.startsWith(Constant.PREPARE_TAG)){
                 String tmp = data.replace(Constant.PREPARE_TAG , "");
                 PrepareModel model = JSON.parseObject(tmp , PrepareModel.class);
                 Prepare.process(model);
             }
-            if (data.startsWith("<checkpoint"))
+            else if (data.startsWith("<checkpoint"))
                 Checkpoint.process(data);
-            if (data.startsWith("<synchrony"))
+            else if (data.startsWith("<synchrony"))
                 Synchronize.process(data);
-            if (data.startsWith("<synchronized"))
+            else if (data.startsWith("<synchronized"))
                 Synchronize.synchronize(data);
-            if (data.startsWith("<join"))
+            else if (data.startsWith("<join"))
                 SignUp.process(data);
-            if (data.startsWith("<approve"))
+            else if (data.startsWith("<approve"))
                 SignUp.approve(data);
-            if (data.startsWith("{\"record\"")){
-                BufferPool.add(JSON.parseObject(data , Record.class));
-            }
         }
         if (data.startsWith("<view-change")){
             ViewChange.process(data);

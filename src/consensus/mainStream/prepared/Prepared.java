@@ -15,29 +15,29 @@ import java.util.concurrent.TimeUnit;
 public class Prepared implements Runnable {
     @Override
     public void run() {
-        try {
-            TimeUnit.SECONDS.sleep(Constant.BLOCK_GAP);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        int a = Prepare.getValidPrepare();
-        int b = Node.getThreshold();
-        if (Prepare.getValidPrepare() <= Node.getThreshold()){
-            if (Node.isSwitcher()) {
-                Node.addBlock(PrePrepare.getBlock());
-                PrePrepare.setBlock(null);
-                PrePrepare.setDigest(null);
-                Prepare.setValidPrepare(0);
+        while (true){
+            try {
+                TimeUnit.SECONDS.sleep(Constant.BLOCK_GAP);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
-            else {
-                //TODO 算法流程待处理
-                Node.getTmpBlocks().add(PrePrepare.getBlock());
+            if (Prepare.getValidPrepare() <= Node.getThreshold()){
+                if (Node.isSwitcher()) {
+                    Node.addBlock(PrePrepare.getBlock());
+                    PrePrepare.setBlock(null);
+                    PrePrepare.setDigest(null);
+                    Prepare.setValidPrepare(0);
+                }
+                else {
+                    //TODO 算法流程待处理
+                    Node.getTmpBlocks().add(PrePrepare.getBlock());
+                }
+                if (Node.getBlockChain().size() % Constant.CHECKPOINT == 0){
+                    Checkpoint.generate();
+                }
+            }else {
+                ViewChange.generate();
             }
-            if (Node.getBlockChain().size() % Constant.CHECKPOINT == 0){
-                Checkpoint.generate();
-            }
-        }else {
-            ViewChange.generate();
         }
     }
 

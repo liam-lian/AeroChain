@@ -13,10 +13,8 @@ public class BufferPool {
     private static Set<Record> set = new HashSet<>();
 
     public static synchronized List<Record> generateBlockRecord(){
-        List<Record> result = new ArrayList<>();
-        for (int i = 0 ; i < bufferPool.size() ; i++){
-            result.add(bufferPool.get(i));
-        }
+        List<Record> result = new ArrayList<>(bufferPool);
+        bufferPool = new ArrayList<>();
         return result;
     }
 
@@ -27,9 +25,5 @@ public class BufferPool {
 
     public static boolean isContain(Record record){
         return set.contains(record);
-    }
-
-    public static Set<Record> getSet() {
-        return set;
     }
 }

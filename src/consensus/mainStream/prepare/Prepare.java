@@ -9,7 +9,7 @@ import node.Node;
 import util.Log;
 
 public class Prepare {
-    private static int validPrepare;
+    private static volatile int validPrepare;
 
     public static void generate(PrePrepareModel prePrepare){
         if (Node.isSwitcher()){
@@ -26,7 +26,7 @@ public class Prepare {
         if (prepare.getView() == Node.getView() && prepare.getHeight() == (Node.getBlockChainHeight() + 1) && prepare.getDigest().equals(PrePrepare.getDigest())) {
             if (validPrepare == 0)
                 Log.log(Constant.SEPARTOR, "prepareLog");
-            validPrepare++;
+            setValidPrepare(validPrepare + 1);
             Log.log(prepare.toString(), "prepareLog");
         }
     }
