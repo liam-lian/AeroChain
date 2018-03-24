@@ -20,18 +20,12 @@ public class PrePrepare {
     public static void generate(Block block){
         PrePrepareModel model = new PrePrepareModel();
         model.setPrimary(Node.getPrimary());
-        model.setView(Integer.valueOf(Node.getView()));
+        model.setView(Node.getView());
         model.setHeight(Node.getBlockChainHeight() + 1);
         model.setBlock(block);
         model.setDigest(Hash.hash(block.toString()));
         Sender.broadcast("<pre-prepare>" + JSON.toJSONString(model));
         Node.setThreshold(threshold());
-    }
-
-    private static int threshold(){
-        int n = Node.getNodeNums();
-        int f = Integer.valueOf(Node.getFaultyNodeNums());
-        return (int) Math.ceil((n - f) / 2) + f + ((n - f ) % 2 == 0 ? 1 : 0);
     }
 
     public static void process(PrePrepareModel prePrepare){
@@ -44,9 +38,8 @@ public class PrePrepare {
     }
 
     private static boolean isValid(Block block){
-        Set<Record> set = BufferPool.getSet();
         for (Record record : block.getData()){
-            if (!set.contains(record)){
+            if (!BufferPool.isContain(record)){
                 return false;
             }
 
@@ -54,19 +47,25 @@ public class PrePrepare {
         return block.getPrevHash().equals(Node.getLatestHash());
     }
 
-    public static String getDigest() {
+    public synchronized static String getDigest() {
         return digest;
     }
 
-    public static void setDigest(String digest) {
+    public synchronized static void setDigest(String digest) {
         PrePrepare.digest = digest;
     }
 
-    public static Block getBlock() {
+    public synchronized static Block getBlock() {
         return block;
     }
 
-    public static void setBlock(Block block) {
+    public synchronized static void setBlock(Block block) {
         PrePrepare.block = block;
+    }
+
+    private static int threshold(){
+        int n = Node.getNodeNums();
+        int f = Integer.valueOf(Node.getFaultyNodeNums());
+        return (int) Math.ceil((n - f) / 2) + f + ((n - f ) % 2 == 0 ? 1 : 0);
     }
 }
