@@ -29,7 +29,7 @@ public class PrePrepare {
     }
 
     public static void process(PrePrepareModel prePrepare){
-        Log.log(prePrepare.toString() , "prePrepareLog");
+        Log.log(prePrepare.toString() , "prePrepareLog" , true);
         if (Node.getView() == prePrepare.view && (Node.getBlockChainHeight() + 1) == prePrepare.getHeight() && isValid(prePrepare.getBlock())){
             setDigest(prePrepare.getDigest());
             setBlock(prePrepare.getBlock());

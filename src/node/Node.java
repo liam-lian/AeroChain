@@ -66,16 +66,13 @@ public class Node {
         }
     }
 
+    public static boolean isPrimary(){
+        return (id == view % nodeNums);
+    }
+
     @Override
     public String toString() {
         return "Node{}";
-    }
-
-    public static boolean isPrimary(){
-        int view = Node.getView();
-        int id = Node.getId();
-        int n = Node.getNodeNums();
-        return id == view % n;
     }
 
     public synchronized static String getLatestHash(){
@@ -159,7 +156,7 @@ public class Node {
         return blockChain;
     }
 
-    public static void setBlockChain(List<Block> newBlockChain) {
+    public synchronized static void setBlockChain(List<Block> newBlockChain) {
         blockChain = newBlockChain;
     }
 }

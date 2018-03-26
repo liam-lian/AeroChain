@@ -33,7 +33,7 @@ public class SignUp {
     }
 
     public static void approve(String data){
-        Log.log(data , "signUp");
+        Log.log(data , "signUp" , true);
     }
 
     private static String selfIntroduction(){

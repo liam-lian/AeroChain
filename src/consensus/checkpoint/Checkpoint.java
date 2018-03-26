@@ -30,13 +30,13 @@ public class Checkpoint {
         String result = stringBuilder.toString();
         Sender.broadcast(result);
         signature = Node.getBlockChain().size() + Hash.hash(Node.getBlockChain().get(Node.getBlockChain().size() - 1).toString()) + Node.getView();
-        Log.log(result , "checkpoint");
+        Log.log(result , "checkpoint" , true);
     }
 
     public synchronized static void process(String data){
         String[] strings = data.split(",");
         if ((strings[height] + strings[digest] + strings[view]).equals(signature)){
-            Log.log(data , "checkpoint");
+            Log.log(data , "checkpoint" ,true);
             if (++count == Node.getThreshold()){
                 currentHeight = Integer.valueOf(strings[height]);
                 deleteOldData();

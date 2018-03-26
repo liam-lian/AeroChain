@@ -25,9 +25,9 @@ public class Prepare {
     public synchronized static void process(PrepareModel prepare){
         if (prepare.getView() == Node.getView() && prepare.getHeight() == (Node.getBlockChainHeight() + 1) && prepare.getDigest().equals(PrePrepare.getDigest())) {
             if (validPrepare == 0)
-                Log.log(Constant.SEPARTOR, "prepareLog");
+                Log.log(Constant.SEPARTOR, "prepareLog" ,true);
             setValidPrepare(validPrepare + 1);
-            Log.log(prepare.toString(), "prepareLog");
+            Log.log(prepare.toString(), "prepareLog" , true);
         }
     }
 

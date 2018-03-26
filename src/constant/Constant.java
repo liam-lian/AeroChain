@@ -18,6 +18,8 @@ public class Constant {
 
     public static final String SEPARTOR = "- - - - - - - - - -";
 
+    public static final String LOG_BASEPATH = "C:\\Users\\DSY\\blockchain\\log\\";
+
     public static List<String> address = new ArrayList<>();
     static {
         address.add("127.0.0.1");

@@ -19,12 +19,14 @@ public class GenerateBlock implements Runnable{
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            List<Record> records = BufferPool.generateBlockRecord();
-            String merkleRoot = getMerkleRoot(records);
-            int currentHeight = Node.getBlockChainHeight();
-            String prevHash = currentHeight == 0 ? "non" : Node.getLatestHash();
-            Block block = new Block(merkleRoot , prevHash , Node.getId() , new Date() , Constant.VERSION, records , currentHeight + 1);
-            PrePrepare.generate(block);
+            if (Node.isPrimary()){
+                List<Record> records = BufferPool.generateBlockRecord();
+                String merkleRoot = getMerkleRoot(records);
+                int currentHeight = Node.getBlockChainHeight();
+                String prevHash = currentHeight == 0 ? "non" : Node.getLatestHash();
+                Block block = new Block(merkleRoot , prevHash , Node.getId() , new Date() , Constant.VERSION, records , currentHeight + 1);
+                PrePrepare.generate(block);
+            }
         }
     }
 
