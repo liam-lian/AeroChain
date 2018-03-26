@@ -42,4 +42,14 @@ public class PrepareModel {
     }
 
     public PrepareModel() {}
+
+    @Override
+    public String toString() {
+        return "PrepareModel{" +
+                "id=" + id +
+                ", view=" + view +
+                ", height=" + height +
+                ", digest='" + digest + '\'' +
+                '}';
+    }
 }

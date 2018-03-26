@@ -18,11 +18,11 @@ public class Prepared implements Runnable {
     public void run() {
         while (true){
             try {
-                TimeUnit.SECONDS.sleep(Constant.BLOCK_GAP);
+                TimeUnit.SECONDS.sleep(1);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            if (Prepare.getValidPrepare() >= Node.getThreshold()){
+            if (Prepare.getValidPrepare() >= Node.getThreshold()) {
                 if (Node.isSwitcher()) {
                     Node.addBlock(PrePrepare.getBlock());
                     PrePrepare.setBlock(null);
@@ -36,9 +36,10 @@ public class Prepared implements Runnable {
 //                if (Node.getBlockChain().size() % Constant.CHECKPOINT == 0){
 //                    Checkpoint.generate();
 //                }
-            }else {
-                Block a = new Block("merkle" , "non" , Node.getId() , new Date() , Constant.VERSION, new ArrayList<>() , Node.getBlockChainHeight() + 1);
-                Node.addBlock(a);
+//            }else {
+//                Block a = new Block("merkle" , "non" , Node.getId() , new Date() , Constant.VERSION, new ArrayList<>() , Node.getBlockChainHeight() + 1);
+//                Node.addBlock(a);
+//            }
             }
         }
     }

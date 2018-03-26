@@ -25,15 +25,16 @@ public class PrePrepare {
         model.setBlock(block);
         model.setDigest(Hash.hash(block.toString()));
         Sender.broadcast("<pre-prepare>" + JSON.toJSONString(model));
-        Node.setThreshold(threshold());
+
     }
 
     public static void process(PrePrepareModel prePrepare){
-        Log.log(prePrepare.toString() , "prePrepareLog" , true);
         if (Node.getView() == prePrepare.view && (Node.getBlockChainHeight() + 1) == prePrepare.getHeight() && isValid(prePrepare.getBlock())){
             setDigest(prePrepare.getDigest());
             setBlock(prePrepare.getBlock());
             Prepare.generate(prePrepare);
+            Node.setThreshold(threshold());
+            Log.log(prePrepare.toString() , "prePrepareLog" , true);
         }
     }
 

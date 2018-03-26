@@ -35,7 +35,7 @@ public class Node {
 
     private static String faultyNodeNums = "1";
 
-    private static int threshold = Integer.MAX_VALUE;
+    private volatile static int threshold = Integer.MAX_VALUE;
 
     public static void main(String[] args) throws IOException {
         Initial.init();

@@ -31,7 +31,7 @@ public class Prepare {
         }
     }
 
-    public static int getValidPrepare() {
+    public synchronized static int getValidPrepare() {
         return validPrepare;
     }
 

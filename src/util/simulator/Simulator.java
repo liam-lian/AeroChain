@@ -35,7 +35,6 @@ public class Simulator implements Runnable{
                     System.out.println(line);
                 }
                 else{
-
                     List<Block> result = Node.getBlockChain();
                     StringBuilder stringBuilder = new StringBuilder();
                     for (Block b : result){
@@ -49,7 +48,7 @@ public class Simulator implements Runnable{
                 e.printStackTrace();
             }
             try {
-                TimeUnit.SECONDS.sleep(1);
+                TimeUnit.SECONDS.sleep(5);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
