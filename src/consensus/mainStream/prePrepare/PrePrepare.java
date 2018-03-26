@@ -42,7 +42,6 @@ public class PrePrepare {
             if (!BufferPool.isContain(record)){
                 return false;
             }
-
         }
         return block.getPrevHash().equals(Node.getLatestHash());
     }

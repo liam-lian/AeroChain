@@ -27,7 +27,6 @@ public class Synchronize {
         stringBuilder.append(Node.getBlockChainHeight()).append(",");
         stringBuilder.append(Node.getId()).append(">");
         Node.setSwitcher(false);
-        Node.setBlockChain(new ArrayList<>());
         Sender.broadcast(stringBuilder.toString());
     }
 
@@ -51,9 +50,9 @@ public class Synchronize {
         List<List<String>> blockProof = null;
         if (isValidCheckpoint(checkpoint , checkpointProof) && isValidBlock(checkpoint , blockchain , blockProof)){
             Node.setBlockChain(blockchain);
-            for (Block block : Node.getTmpBlocks()){
+//            for (Block block : Node.getTmpBlocks()){
 //                if ()
-            }
+//            }
             Node.setSwitcher(true);
         }
     }

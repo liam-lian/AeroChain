@@ -37,8 +37,6 @@ public class Node {
 
     private static int threshold = Integer.MAX_VALUE;
 
-    private static List<Block> tmpBlocks;
-
     public static void main(String[] args) throws IOException {
         Initial.init();
         ExecutorService executorService = Executors.newFixedThreadPool(4);
@@ -50,8 +48,11 @@ public class Node {
             BufferedReader stdin = new BufferedReader(new InputStreamReader(System.in));
             String input;
             while ((input = stdin.readLine()) != null){
-                if (input.equals("show"))
-                    System.out.println(blockChain);
+                if (input.equals("show")){
+                    List<Block> result = Node.getBlockChain();
+                    for (Block b : result)
+                        System.out.println(Hash.hash(b.toString()) + " " + b);
+                }
                 if (input.equals("signUp"))
                     SignUp.generate();
                 if (input.startsWith("f:"))
@@ -65,33 +66,38 @@ public class Node {
         }
     }
 
+    @Override
+    public String toString() {
+        return "Node{}";
+    }
+
     public static boolean isPrimary(){
-        int view = Integer.valueOf(Node.getView());
-        int id = Integer.valueOf(Node.getId());
-        int n = Integer.valueOf(Node.getNodeNums());
+        int view = Node.getView();
+        int id = Node.getId();
+        int n = Node.getNodeNums();
         return id == view % n;
     }
 
-    public static String getLatestHash(){
+    public synchronized static String getLatestHash(){
         if (blockChain.size() == 0) return "non";
         return Hash.hash(blockChain.get(blockChain.size() - 1).toString());
     }
 
-    public static int getBlockChainHeight(){
+    public synchronized static int getBlockChainHeight(){
         return blockChain.size();
     }
 
-    public static void addBlock(Block block){
+    public synchronized static void addBlock(Block block){
         blockChain.add(block);
     }
 
-    public static List<Block> getTmpBlocks() {
-        return tmpBlocks;
-    }
-
-    public static void setTmpBlocks(List<Block> tmpBlocks) {
-        Node.tmpBlocks = tmpBlocks;
-    }
+//    public static List<Block> getTmpBlocks() {
+//        return tmpBlocks;
+//    }
+//
+//    public static void setTmpBlocks(List<Block> tmpBlocks) {
+//        Node.tmpBlocks = tmpBlocks;
+//    }
 
     public static String getFaultyNodeNums() {
         return faultyNodeNums;
@@ -149,7 +155,7 @@ public class Node {
         id = id;
     }
 
-    public static List<Block> getBlockChain() {
+    public synchronized static List<Block> getBlockChain() {
         return blockChain;
     }
 
