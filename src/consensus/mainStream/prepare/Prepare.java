@@ -7,6 +7,7 @@ import consensus.mainStream.prePrepare.PrePrepareModel;
 import constant.Constant;
 import node.Node;
 import util.Log;
+import util.Sign;
 
 public class Prepare {
     private static volatile int validPrepare;
@@ -24,6 +25,7 @@ public class Prepare {
 
     public synchronized static void process(PrepareModel prepare){
         if (prepare.getView() == Node.getView() && prepare.getHeight() == (Node.getBlockChainHeight() + 1) && prepare.getDigest().equals(PrePrepare.getDigest())) {
+            Sign.jdkRSA();
             if (validPrepare == 0)
                 Log.log(Constant.SEPARTOR, "prepareLog" ,true);
             setValidPrepare(validPrepare + 1);

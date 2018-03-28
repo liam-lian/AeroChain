@@ -8,6 +8,7 @@ import model.block.Block;
 import model.record.Record;
 import node.Node;
 import util.Log;
+import util.Sign;
 import util.hash.Hash;
 
 import java.util.Set;
@@ -25,12 +26,12 @@ public class PrePrepare {
         model.setBlock(block);
         model.setDigest(Hash.hash(block.toString()));
         Sender.broadcast("<pre-prepare>" + JSON.toJSONString(model));
-
     }
 
     public static void process(PrePrepareModel prePrepare){
         if (Node.getView() == prePrepare.view && (Node.getBlockChainHeight() + 1) == prePrepare.getHeight() && isValid(prePrepare.getBlock())){
             setDigest(prePrepare.getDigest());
+            Sign.jdkRSA();
             setBlock(prePrepare.getBlock());
             Prepare.generate(prePrepare);
             Node.setThreshold(threshold());
