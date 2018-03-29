@@ -12,6 +12,8 @@ public class Block {
 
     private int primary;
 
+    private int view;
+
     private Date timeStamp;
 
     private String version;
@@ -20,10 +22,11 @@ public class Block {
 
     private List<Record> data;
 
-    public Block(String merkleRoot, String prevHash, int primary, Date timeStamp, String version, List<Record> data , int index) {
+    public Block(String merkleRoot, String prevHash, int primary, int view, Date timeStamp, String version, List<Record> data , int index) {
         this.merkleRoot = merkleRoot;
         this.prevHash = prevHash;
         this.primary = primary;
+        this.view = view;
         this.timeStamp = timeStamp;
         this.version = version;
         this.data = data;
