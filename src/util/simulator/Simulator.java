@@ -16,9 +16,11 @@ public class Simulator implements Runnable{
     public static boolean switcher = true;
 
     static BufferedReader bufferedReader;
+    static PrintWriter printWriter;
 
     public static void init(){
         try {
+            printWriter = new PrintWriter(new BufferedWriter(new OutputStreamWriter(new FileOutputStream("C:\\Users\\DSY\\blockchain\\log\\sss"), "UTF-8")));
             bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream("simulate.txt"), "UTF-8"));
         } catch (UnsupportedEncodingException | FileNotFoundException e) {
             e.printStackTrace();
@@ -43,7 +45,6 @@ public class Simulator implements Runnable{
                     Log.log(stringBuilder.toString() , "blocks" , false);
                     System.exit(0);
                 }
-
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -52,7 +53,8 @@ public class Simulator implements Runnable{
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            Sender.broadcast(JSON.toJSONString(record));
+            printWriter.println(record);
+//            Sender.broadcast(JSON.toJSONString(record));
         }
     }
 }

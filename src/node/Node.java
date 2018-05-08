@@ -16,7 +16,7 @@ import java.util.concurrent.Executors;
 
 /**
  * Created by DSY on 2018/3/15.
- * 区块链节点编号从1开始
+ * 区块链高度编号从1开始
  */
 
 public class Node {
