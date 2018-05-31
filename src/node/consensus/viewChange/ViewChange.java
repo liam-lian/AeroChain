@@ -1,11 +1,11 @@
-package consensus.viewChange;
+package node.consensus.viewChange;
 
-import communication.Sender;
-import consensus.checkpoint.Checkpoint;
-import consensus.mainStream.prepared.Prepared;
+import node.communication.Sender;
+import node.consensus.checkpoint.Checkpoint;
+import node.consensus.mainStream.prepared.Prepared;
 import model.block.Block;
 import node.Node;
-import node.Resolver;
+import node.communication.Resolver;
 
 import java.util.ArrayList;
 import java.util.HashMap;

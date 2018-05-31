@@ -1,15 +1,15 @@
-package node;
+package node.communication;
 
 import com.alibaba.fastjson.JSON;
-import consensus.checkpoint.Checkpoint;
-import consensus.mainStream.prePrepare.PrePrepare;
-import consensus.mainStream.prePrepare.PrePrepareModel;
-import consensus.mainStream.prepare.Prepare;
-import buffer.BufferPool;
-import consensus.mainStream.prepare.PrepareModel;
-import consensus.signUp.SignUp;
-import consensus.synchronize.Synchronize;
-import consensus.viewChange.ViewChange;
+import node.consensus.checkpoint.Checkpoint;
+import node.consensus.mainStream.prePrepare.PrePrepare;
+import node.consensus.mainStream.prePrepare.PrePrepareModel;
+import node.consensus.mainStream.prepare.Prepare;
+import node.buffer.BufferPool;
+import node.consensus.mainStream.prepare.PrepareModel;
+import node.consensus.signUp.SignUp;
+import node.consensus.synchronize.Synchronize;
+import node.consensus.viewChange.ViewChange;
 import constant.Constant;
 import model.record.Record;
 

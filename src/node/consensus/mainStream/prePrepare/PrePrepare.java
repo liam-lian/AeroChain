@@ -1,17 +1,15 @@
-package consensus.mainStream.prePrepare;
+package node.consensus.mainStream.prePrepare;
 
-import buffer.BufferPool;
+import node.buffer.BufferPool;
 import com.alibaba.fastjson.JSON;
-import communication.Sender;
-import consensus.mainStream.prepare.Prepare;
+import node.communication.Sender;
+import node.consensus.mainStream.prepare.Prepare;
 import model.block.Block;
 import model.record.Record;
 import node.Node;
 import util.Log;
 import util.Sign;
 import util.hash.Hash;
-
-import java.util.Set;
 
 public class PrePrepare {
     private static Block block;
@@ -29,7 +27,7 @@ public class PrePrepare {
     }
 
     public static void process(PrePrepareModel prePrepare){
-        if (Node.getView() == prePrepare.view && (Node.getBlockChainHeight() + 1) == prePrepare.getHeight() && isValid(prePrepare.getBlock())){
+        if (Node.getView() == prePrepare.getView() && (Node.getBlockChainHeight() + 1) == prePrepare.getHeight() && isValid(prePrepare.getBlock())){
             setDigest(prePrepare.getDigest());
             Sign.jdkRSA();
             setBlock(prePrepare.getBlock());

@@ -1,9 +1,9 @@
-package consensus.mainStream.prepared;
+package node.consensus.mainStream.prepared;
 
-import consensus.checkpoint.Checkpoint;
-import consensus.mainStream.prePrepare.PrePrepare;
-import consensus.mainStream.prepare.Prepare;
-import consensus.viewChange.ViewChange;
+import node.consensus.checkpoint.Checkpoint;
+import node.consensus.mainStream.prePrepare.PrePrepare;
+import node.consensus.mainStream.prepare.Prepare;
+import node.consensus.viewChange.ViewChange;
 import constant.Constant;
 import model.block.Block;
 import node.Node;

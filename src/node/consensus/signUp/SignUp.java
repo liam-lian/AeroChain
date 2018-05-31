@@ -1,6 +1,6 @@
-package consensus.signUp;
+package node.consensus.signUp;
 
-import communication.Sender;
+import node.communication.Sender;
 import node.Node;
 import util.Log;
 

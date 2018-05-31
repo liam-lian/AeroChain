@@ -1,4 +1,4 @@
-package communication;
+package node.communication;
 
 import constant.Constant;
 

@@ -1,9 +1,8 @@
 package node;
 
-import consensus.mainStream.prePrepare.PrePrepare;
+import node.consensus.mainStream.prePrepare.PrePrepare;
 import model.block.Block;
-import buffer.BufferPool;
-import com.alibaba.fastjson.JSON;
+import node.buffer.BufferPool;
 import constant.Constant;
 import model.record.Record;
 import java.util.Date;
@@ -31,6 +30,13 @@ public class GenerateBlock implements Runnable{
     }
 
     private String getMerkleRoot(List<Record> records){
-        return "merkle_root";
+        String result = "merkle_root";
+        if (records.size() == 0) return result;
+        int size = records.size();
+        int exponential = 0;
+        while (Math.pow(2 , exponential) < size){
+            exponential++;
+        }
+        return result;
     }
 }

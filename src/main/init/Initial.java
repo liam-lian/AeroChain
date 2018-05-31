@@ -1,7 +1,7 @@
-package init;
+package main.init;
 
-import communication.Reciever;
-import communication.Sender;
+import node.communication.Reciever;
+import client.Client;
 import util.Sign;
 import util.simulator.Simulator;
 
@@ -10,5 +10,6 @@ public class Initial {
         Reciever.init();
         Simulator.init();
         Sign.init();
+        Client.init();
     }
 }

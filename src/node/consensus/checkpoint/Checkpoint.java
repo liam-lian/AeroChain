@@ -1,6 +1,6 @@
-package consensus.checkpoint;
+package node.consensus.checkpoint;
 
-import communication.Sender;
+import node.communication.Sender;
 import node.Node;
 import util.Log;
 import util.hash.Hash;

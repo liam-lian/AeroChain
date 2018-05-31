@@ -1,4 +1,4 @@
-package consensus.checkpoint;
+package node.consensus.checkpoint;
 
 /**
  * Created by DSY on 2018/3/15.

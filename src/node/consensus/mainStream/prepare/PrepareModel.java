@@ -1,4 +1,4 @@
-package consensus.mainStream.prepare;
+package node.consensus.mainStream.prepare;
 
 public class PrepareModel {
     int id;

@@ -1,16 +1,15 @@
-package consensus.synchronize;
+package node.consensus.synchronize;
 
-import communication.Sender;
-import consensus.checkpoint.Checkpoint;
-import consensus.mainStream.prepared.Prepared;
+import node.communication.Sender;
+import node.consensus.checkpoint.Checkpoint;
+import node.consensus.mainStream.prepared.Prepared;
 import model.block.Block;
 import node.Node;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import static consensus.checkpoint.Checkpoint.isValidCheckpoint;
-import static consensus.mainStream.prepared.Prepared.isValidBlock;
+import static node.consensus.checkpoint.Checkpoint.isValidCheckpoint;
+import static node.consensus.mainStream.prepared.Prepared.isValidBlock;
 
 public class Synchronize {
     private static final int checkpointProofs = 3;

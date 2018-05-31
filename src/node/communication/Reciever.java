@@ -1,7 +1,4 @@
-package communication;
-
-import node.Node;
-import node.Resolver;
+package node.communication;
 
 import java.io.IOException;
 import java.net.*;

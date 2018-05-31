@@ -1,17 +1,17 @@
-package consensus.mainStream.prePrepare;
+package node.consensus.mainStream.prePrepare;
 
 import model.block.Block;
 
 public class PrePrepareModel {
-    int primary;
+    private int primary;
 
-    int view;
+    private int view;
 
-    int height;
+    private int height;
 
-    Block block;
+    private Block block;
 
-    String digest;
+    private String digest;
 
     public int getPrimary() {
         return primary;
