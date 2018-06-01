@@ -1,31 +1,31 @@
-package node;
+package model.node;
 
-import client.Client;
-import node.consensus.mainStream.prepared.Prepared;
-import node.consensus.signUp.SignUp;
 import model.block.Block;
-import node.communication.Reciever;
-import main.init.Initial;
 import util.hash.Hash;
-import util.simulator.Simulator;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.*;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 /**
  * Created by DSY on 2018/3/15.
- * 区块链高度编号从1开始
+ * 区块链节点模型
+ * 第一个区块的高度是1
  */
-
 public class Node {
-    //判断节点当前的工作状态，是否需要对外发送prepare消息
-    private static boolean switcher = true;
+    /**
+     * 判断是否进入同步状态，如果进入同步状态，那么不再发送prepare消息，
+     * 但是正常接受prePrepare和prepare消息
+     * */
+    private static boolean synSwitcher = false;
+
+    /**
+     * 判断是否进入视图切换状态，如果进入视图切换状态，则只接受跟视图切换相关的消息
+     */
+    private static boolean viewChangeSwitcher = false;
 
     private static List<Block> blockChain = new ArrayList<>();
-    //用于存储同步过程中产生的临时区块
+
+    /**
+     * 用于存储区块同步过程中，生成的临时区块
+     */
     private static List<Block> tmpBlocks = new ArrayList<>();
 
     private static int id = 1;
@@ -42,11 +42,6 @@ public class Node {
 
     public static boolean isPrimary(){
         return (id == view % nodeNums);
-    }
-
-    @Override
-    public String toString() {
-        return "Node{}";
     }
 
     public synchronized static String getLatestHash(){
@@ -86,12 +81,20 @@ public class Node {
         Node.threshold = threshold;
     }
 
-    public static boolean isSwitcher() {
-        return switcher;
+    public static boolean isSynSwitcher() {
+        return synSwitcher;
     }
 
-    public static void setSwitcher(boolean switcher) {
-        Node.switcher = switcher;
+    public static void setSynSwitcher(boolean synSwitcher) {
+        Node.synSwitcher = synSwitcher;
+    }
+
+    public static boolean isViewChangeSwitcher() {
+        return viewChangeSwitcher;
+    }
+
+    public static void setViewChangeSwitcher(boolean viewChangeSwitcher) {
+        Node.viewChangeSwitcher = viewChangeSwitcher;
     }
 
     public static int getPrimary() {

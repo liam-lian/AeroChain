@@ -1,5 +1,9 @@
 package util;
 
+/**
+ * Created by DSY on 2018/5/10.
+ * 模拟POW算法的哈希运算
+ */
 import java.security.*;
 import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
@@ -9,9 +13,9 @@ import java.security.spec.X509EncodedKeySpec;
 public class Sign {
     private static String src = "imooc security rsa";
 
-    static RSAPublicKey rsaPublicKey;
+    private static RSAPublicKey rsaPublicKey;
 
-    static RSAPrivateKey rsaPrivateKey;
+    private static RSAPrivateKey rsaPrivateKey;
 
     public static void main(String[] args) {
             jdkRSA();

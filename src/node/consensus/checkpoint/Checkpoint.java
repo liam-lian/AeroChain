@@ -1,7 +1,7 @@
 package node.consensus.checkpoint;
 
 import node.communication.Sender;
-import node.Node;
+import model.node.Node;
 import util.Log;
 import util.hash.Hash;
 

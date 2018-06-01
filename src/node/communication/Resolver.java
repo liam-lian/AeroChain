@@ -3,16 +3,20 @@ package node.communication;
 import com.alibaba.fastjson.JSON;
 import node.consensus.checkpoint.Checkpoint;
 import node.consensus.mainStream.prePrepare.PrePrepare;
-import node.consensus.mainStream.prePrepare.PrePrepareModel;
+import model.node.consensusMessage.PrePrepareModel;
 import node.consensus.mainStream.prepare.Prepare;
 import node.buffer.BufferPool;
-import node.consensus.mainStream.prepare.PrepareModel;
+import model.node.consensusMessage.PrepareModel;
 import node.consensus.signUp.SignUp;
 import node.consensus.synchronize.Synchronize;
 import node.consensus.viewChange.ViewChange;
 import constant.Constant;
 import model.record.Record;
 
+/**
+ * Created by DSY on 2018/3/15.
+ * 根据区块链节点收到的消息执行相应的操作
+ */
 public class Resolver {
     private static boolean switcher = true;
 

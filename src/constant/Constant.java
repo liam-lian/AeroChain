@@ -28,4 +28,8 @@ public class Constant {
         address.add("192.168.0.127");
         address.add("192.168.0.116");
     }
+
+    public static final String CLIENT_LOG_ADDRESS = LOG_BASEPATH + "client";
+
+    public static final String UTF_8 = "UTF-8";
 }

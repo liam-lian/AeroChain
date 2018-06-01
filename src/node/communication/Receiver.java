@@ -1,13 +1,19 @@
 package node.communication;
 
+import main.Main;
+
 import java.io.IOException;
 import java.net.*;
 
-public class Reciever implements Runnable {
+/**
+ * Created by DSY on 2018/3/15.
+ * 区块链节点使用UDP协议与彼此和客户端通信
+ */
+public class Receiver implements Runnable {
     private volatile static DatagramSocket server;
 
     public void run(){
-        while (true){
+        while (Main.running){
             byte[] recvBuf = new byte[8192];
             DatagramPacket recvPacket = new DatagramPacket(recvBuf , recvBuf.length);
             try {
@@ -22,7 +28,7 @@ public class Reciever implements Runnable {
 
     public static void init(){
         if (server == null){
-            synchronized (Reciever.class){
+            synchronized (Receiver.class){
                 if (server == null){
                     try {
                         server = new DatagramSocket(7777);

@@ -1,15 +1,11 @@
 package node.consensus.mainStream.prepared;
 
-import node.consensus.checkpoint.Checkpoint;
 import node.consensus.mainStream.prePrepare.PrePrepare;
 import node.consensus.mainStream.prepare.Prepare;
-import node.consensus.viewChange.ViewChange;
-import constant.Constant;
 import model.block.Block;
-import node.Node;
+import model.node.Node;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 

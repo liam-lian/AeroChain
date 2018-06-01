@@ -1,12 +1,13 @@
 package node.consensus.mainStream.prePrepare;
 
+import model.node.consensusMessage.PrePrepareModel;
 import node.buffer.BufferPool;
 import com.alibaba.fastjson.JSON;
 import node.communication.Sender;
 import node.consensus.mainStream.prepare.Prepare;
 import model.block.Block;
 import model.record.Record;
-import node.Node;
+import model.node.Node;
 import util.Log;
 import util.Sign;
 import util.hash.Hash;

@@ -3,16 +3,15 @@ package main;
 import client.Client;
 import main.init.Initial;
 import model.block.Block;
-import node.GenerateBlock;
-import node.Node;
-import node.communication.Reciever;
+import node.consensus.mainStream.generateBlock.GenerateBlock;
+import model.node.Node;
+import node.communication.Receiver;
 import node.consensus.mainStream.prepared.Prepared;
 import node.consensus.signUp.SignUp;
 import util.hash.Hash;
 import util.simulator.Simulator;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
@@ -20,13 +19,17 @@ import java.util.concurrent.Executors;
 
 /**
  * Created by DSY on 2018/5/31.
- * 程序入口
+ * 区块链应用包括区块链节点和客户端两部分
+ * 区块链应用程序入口，启动客户端，区块链节点。
  */
 public class Main {
+    /** 标志着区块链应用是否启动 */
+    public static boolean running = false;
+
     public static void main(String[] args) throws Exception{
         Initial.init();
         ExecutorService executorService = Executors.newFixedThreadPool(5);
-        executorService.execute(new Reciever());
+        executorService.execute(new Receiver());
         executorService.execute(new Simulator());
         executorService.execute(new GenerateBlock());
         executorService.execute(new Prepared());
@@ -45,7 +48,7 @@ public class Main {
                 if (input.startsWith("f:"))
                     Node.setFaultyNodeNums(input.replace("f:" , ""));
                 if (input.equals("exit")){
-                    Reciever.clean();
+                    Receiver.clean();
                     executorService.shutdown();
                     System.exit(0);
                 }

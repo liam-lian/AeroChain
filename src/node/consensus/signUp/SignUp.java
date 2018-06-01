@@ -1,7 +1,7 @@
 package node.consensus.signUp;
 
 import node.communication.Sender;
-import node.Node;
+import model.node.Node;
 import util.Log;
 
 public class SignUp {
