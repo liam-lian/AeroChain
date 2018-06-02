@@ -8,6 +8,7 @@ import java.util.*;
  * Created by DSY on 2018/3/15.
  * 区块链节点模型
  * 第一个区块的高度是1
+ * 当前版本不考虑节点动态变化的功能
  */
 public class Node {
     /**
@@ -34,14 +35,20 @@ public class Node {
 
     private static int view = 1;
 
-    private static int nodeNums = 4;
+    private static int nodeNum = 4;
 
-    private static String faultyNodeNums = "1";
+    private static String faultyNodeNum = "1";
 
     private volatile static int threshold = Integer.MAX_VALUE;
 
+    public static void threshold(){
+        int n = Node.getNodeNums();
+        int f = Integer.valueOf(Node.getFaultyNodeNums());
+        threshold = (int) Math.ceil((n - f) / 2) + f + ((n - f ) % 2 == 0 ? 1 : 0);
+    }
+
     public static boolean isPrimary(){
-        return (id == view % nodeNums);
+        return (id == view % nodeNum);
     }
 
     public synchronized static String getLatestHash(){
@@ -66,11 +73,11 @@ public class Node {
     }
 
     public static String getFaultyNodeNums() {
-        return faultyNodeNums;
+        return faultyNodeNum;
     }
 
     public static void setFaultyNodeNums(String faultyNodeNums) {
-        Node.faultyNodeNums = faultyNodeNums;
+        Node.faultyNodeNum = faultyNodeNums;
     }
 
     public static int getThreshold() {
@@ -114,11 +121,11 @@ public class Node {
     }
 
     public static int getNodeNums() {
-        return nodeNums;
+        return nodeNum;
     }
 
     public static void setNodeNums(int nodeNums) {
-        Node.nodeNums = nodeNums;
+        Node.nodeNum = nodeNums;
     }
 
     public static int getId() {

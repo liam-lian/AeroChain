@@ -26,7 +26,7 @@ public class ViewChange {
     private static final int blockProof = 4;
 
     public static void generate(){
-        Resolver.setSwitcher(false);
+        Node.setSynSwitcher(true);
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("view-change").append(",");
         stringBuilder.append(Integer.valueOf(Node.getView()) + 1).append(",");
@@ -38,23 +38,6 @@ public class ViewChange {
     }
 
     public static void process(String data){
-        viewChangeProofs.add(data);
-        String[] strings = data.split(",");
-        if (strings[newView].equals(Node.getId())){
-            int checkpoint = Integer.valueOf(strings[2]);
-            List<Block> blockchain = null;
-            List<List<String>> proof = null;
-            if (Checkpoint.isValidCheckpoint(checkpoint , strings[3]) && Prepared.isValidBlock(checkpoint , blockchain , proof)){
-                String signature = strings[checkpointProof] + strings[blockProof];
-                map.putIfAbsent(signature , 0);
-                map.put(signature , map.get(signature) + 1);
-                if (map.get(signature) >= Node.getThreshold()){
-                    Resolver.setSwitcher(false);
-                    viewChange();
-                    Resolver.setSwitcher(true);
-                }
-            }
-        }
     }
 
     private static void viewChange(){

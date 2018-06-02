@@ -1,5 +1,7 @@
 package constant;
 
+import com.sun.deploy.util.SystemUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,9 +10,7 @@ public class Constant {
 
     public static final String PREPARE_TAG = "<prepare>";
 
-    public static final int POTR = 7777;
-
-    public static final String VERSION = "version_0";
+    public static final int PORT = 7777;
 
     public static final int CHECKPOINT = 60;
 
@@ -18,7 +18,13 @@ public class Constant {
 
     public static final String SEPARTOR = "- - - - - - - - - -";
 
-    public static final String LOG_BASEPATH = "C:\\Users\\DSY\\blockchain\\log\\";
+    public static final String WINDOWS_BASEPATH = "C:\\Users\\DSY\\blockchain\\";
+
+    public static final String MAC_BASEPATH = "/Users/dingsiye/projects/AeroChain";
+
+    public static final String WINDOWS_LOG_BASEPATH = "C:\\Users\\DSY\\blockchain\\log\\";
+
+    public static final String MAC_LOG_BASEPATH = "/Users/dingsiye/projects/AeroChain/log";
 
     public static List<String> address = new ArrayList<>();
     static {
@@ -29,7 +35,7 @@ public class Constant {
         address.add("192.168.0.116");
     }
 
-    public static final String CLIENT_LOG_ADDRESS = LOG_BASEPATH + "client";
+    public static final String CLIENT_LOG_ADDRESS = MAC_LOG_BASEPATH + "client";
 
     public static final String UTF_8 = "UTF-8";
 }

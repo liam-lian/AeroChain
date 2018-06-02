@@ -9,3 +9,6 @@ out/
 
 #忽略测试用类
 Mock.java
+
+#忽略idea的iml配置文件
+AeroChain.iml

@@ -9,14 +9,28 @@ import model.block.Block;
 import model.record.Record;
 import model.node.Node;
 import util.Log;
-import util.Sign;
 import util.hash.Hash;
 
+/**
+ * 实现共识算法中涉及prePrepare消息功能的类
+ */
 public class PrePrepare {
-    private static Block block;
+    /**
+     * 记录当前共识轮次中主节点提出的新区块
+     * 多线程共享数据
+     */
+    private volatile static Block block;
 
+    /**
+     * 记录当前共识轮次中主节点提出的prePrepare消息
+     * 多线程共享数据
+     */
     private static String digest;
 
+    /**
+     * 主节点发送prePrepare消息功能
+     * @param block prePrepare中的新区块
+     */
     public static void generate(Block block){
         PrePrepareModel model = new PrePrepareModel();
         model.setPrimary(Node.getPrimary());
@@ -27,18 +41,23 @@ public class PrePrepare {
         Sender.broadcast("<pre-prepare>" + JSON.toJSONString(model));
     }
 
+    /**
+     * 节点接收到主节点发送的prePrepare消息后，首先记录日志，进行验证，如果认可，则发送prepare消息
+     * @param prePrepare 主节点广播的prePrepare消息
+     */
     public static void process(PrePrepareModel prePrepare){
-        if (Node.getView() == prePrepare.getView() && (Node.getBlockChainHeight() + 1) == prePrepare.getHeight() && isValid(prePrepare.getBlock())){
+        Log.log(prePrepare.toString() , "prePrepareLog" , true);
+        if (isValid(prePrepare)){
             setDigest(prePrepare.getDigest());
-            Sign.jdkRSA();
             setBlock(prePrepare.getBlock());
             Prepare.generate(prePrepare);
-            Node.setThreshold(threshold());
-            Log.log(prePrepare.toString() , "prePrepareLog" , true);
         }
     }
 
-    private static boolean isValid(Block block){
+    private static boolean isValid(PrePrepareModel prePrepare){
+        if (!(Node.getView() == prePrepare.getView())) return false;
+        if (Node.getBlockChainHeight() + 1 != prePrepare.getHeight()) return false;
+        Block block = prePrepare.getBlock();
         for (Record record : block.getData()){
             if (!BufferPool.isContain(record)){
                 return false;
@@ -61,11 +80,5 @@ public class PrePrepare {
 
     public synchronized static void setBlock(Block block) {
         PrePrepare.block = block;
-    }
-
-    private static int threshold(){
-        int n = Node.getNodeNums();
-        int f = Integer.valueOf(Node.getFaultyNodeNums());
-        return (int) Math.ceil((n - f) / 2) + f + ((n - f ) % 2 == 0 ? 1 : 0);
     }
 }

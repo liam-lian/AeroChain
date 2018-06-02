@@ -1,5 +1,6 @@
 package main.init;
 
+import model.node.Node;
 import node.communication.Receiver;
 import client.Client;
 import util.Sign;
@@ -9,7 +10,7 @@ public class Initial {
     public static void init(){
         Receiver.init();
         Simulator.init();
-        Sign.init();
         Client.init();
+        Node.threshold();
     }
 }

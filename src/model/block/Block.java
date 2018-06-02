@@ -16,19 +16,16 @@ public class Block {
 
     private Date timeStamp;
 
-    private String version;
-
     private int index;
 
     private List<Record> data;
 
-    public Block(String merkleRoot, String prevHash, int primary, int view, Date timeStamp, String version, List<Record> data , int index) {
+    public Block(String merkleRoot, String prevHash, int primary, int view, Date timeStamp, List<Record> data , int index) {
         this.merkleRoot = merkleRoot;
         this.prevHash = prevHash;
         this.primary = primary;
         this.view = view;
         this.timeStamp = timeStamp;
-        this.version = version;
         this.data = data;
         this.index = index;
     }
@@ -42,7 +39,6 @@ public class Block {
                 ", prevHash='" + prevHash + '\'' +
                 ", primary=" + primary +
                 ", timeStamp=" + timeStamp +
-                ", version=" + version +
                 ", data=" + data +
                 '}';
     }
@@ -85,14 +81,6 @@ public class Block {
 
     public void setTimeStamp(Date timeStamp) {
         this.timeStamp = timeStamp;
-    }
-
-    public String getVersion() {
-        return version;
-    }
-
-    public void setVersion(String version) {
-        this.version = version;
     }
 
     public List<Record> getData() {

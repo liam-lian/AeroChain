@@ -5,6 +5,9 @@ import constant.Constant;
 import java.io.IOException;
 import java.net.*;
 
+/**
+ * 实现节点间发送消息的功能
+ */
 public class Sender{
     public static void sendData(String data , String ip){
         DatagramSocket client = null;
@@ -20,7 +23,7 @@ public class Sender{
         } catch (UnknownHostException e) {
             e.printStackTrace();
         }
-        DatagramPacket sendPacket = new DatagramPacket(sendBuf ,sendBuf.length , addr , Constant.POTR);
+        DatagramPacket sendPacket = new DatagramPacket(sendBuf ,sendBuf.length , addr , Constant.PORT);
         try {
             assert client != null;
             client.send(sendPacket);

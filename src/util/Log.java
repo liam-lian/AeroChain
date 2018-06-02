@@ -7,10 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Log {
-    static final String basePath = Constant.LOG_BASEPATH;
+    private static final String basePath = Constant.MAC_LOG_BASEPATH;
 
     public static void log(String log , String path , boolean append){
-        append = false;
         try {
             PrintWriter printWriter = new PrintWriter(new BufferedWriter(new OutputStreamWriter(new FileOutputStream(basePath + path, append), "UTF-8")));
             printWriter.println(log);
