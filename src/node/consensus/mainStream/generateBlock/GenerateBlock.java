@@ -6,8 +6,6 @@ import model.block.Block;
 import node.buffer.BufferPool;
 import constant.Constant;
 import model.record.Record;
-
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
@@ -31,7 +29,7 @@ public class GenerateBlock implements Runnable{
         }
     }
 
-    private String getMerkleTree(List<Record> records){
+    public String getMerkleTree(List<Record> records){
         String result = "merkle_root";
         if (records.size() == 0) return result;
         int size = records.size();
@@ -42,8 +40,10 @@ public class GenerateBlock implements Runnable{
         int add = (int)(Math.pow(2 , exponential) - size);
         while (add > 0){
             records.add(new Record());
+            add--;
         }
         records.sort(Comparator.comparing(Record::getRecord));
+
         return result;
     }
 }

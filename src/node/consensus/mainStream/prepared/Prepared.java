@@ -4,7 +4,6 @@ import node.consensus.mainStream.prePrepare.PrePrepare;
 import node.consensus.mainStream.prepare.Prepare;
 import model.block.Block;
 import model.node.Node;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -19,12 +18,11 @@ public class Prepared implements Runnable {
                 e.printStackTrace();
             }
             if (Prepare.getValidPrepare() >= Node.getThreshold()) {
-                if (Node.isSwitcher()) {
+
                     Node.addBlock(PrePrepare.getBlock());
                     PrePrepare.setBlock(null);
                     PrePrepare.setDigest(null);
                     Prepare.setValidPrepare(0);
-                }
 //                else {
 //                    //TODO 算法流程待处理
 //                    Node.getTmpBlocks().add(PrePrepare.getBlock());

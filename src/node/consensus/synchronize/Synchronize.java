@@ -25,7 +25,7 @@ public class Synchronize {
         stringBuilder.append("<synchronize").append("<");
         stringBuilder.append(Node.getBlockChainHeight()).append(",");
         stringBuilder.append(Node.getId()).append(">");
-        Node.setSwitcher(false);
+        Node.setSynSwitcher(true);
         Sender.broadcast(stringBuilder.toString());
     }
 
@@ -52,7 +52,7 @@ public class Synchronize {
 //            for (Block block : Node.getTmpBlocks()){
 //                if ()
 //            }
-            Node.setSwitcher(true);
+            Node.setSynSwitcher(false);
         }
     }
 

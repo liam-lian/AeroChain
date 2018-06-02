@@ -14,7 +14,7 @@ public class Prepare {
     private static volatile int validPrepare;
 
     public static void generate(PrePrepareModel prePrepare){
-        if (Node.isSwitcher()){
+        if (!Node.isSynSwitcher()){
             PrepareModel model = new PrepareModel();
             model.setId(Node.getId());
             model.setView(prePrepare.getView());
