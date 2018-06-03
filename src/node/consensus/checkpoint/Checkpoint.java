@@ -21,6 +21,7 @@ public class Checkpoint {
     private static final int view = 4;
 
     public synchronized static void generate(){
+        CheckpointModel checkpointModel = new CheckpointModel();
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("<checkpoint").append(",");
         stringBuilder.append(Node.getBlockChain().size()).append(",");

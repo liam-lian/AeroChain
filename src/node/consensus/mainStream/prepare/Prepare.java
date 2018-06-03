@@ -1,6 +1,7 @@
 package node.consensus.mainStream.prepare;
 
 import com.alibaba.fastjson.JSON;
+import model.annotation.MulThreadSharedData;
 import model.node.consensusMessage.PrepareModel;
 import node.communication.Sender;
 import node.consensus.mainStream.prePrepare.PrePrepare;
@@ -16,6 +17,7 @@ public class Prepare {
      * 当前共识轮次中，主节点提出的区块的确认数
      * 多线程共享数据
      */
+    @MulThreadSharedData.MulThreadShareData
     private static volatile int validPrepare;
 
     /**
