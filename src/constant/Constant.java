@@ -20,11 +20,11 @@ public class Constant {
 
     public static final String WINDOWS_BASEPATH = "C:\\Users\\DSY\\blockchain\\";
 
-    public static final String MAC_BASEPATH = "/Users/dingsiye/projects/AeroChain";
+    public static final String MAC_BASEPATH = "/Users/dingsiye/projects/AeroChain/";
 
     public static final String WINDOWS_LOG_BASEPATH = "C:\\Users\\DSY\\blockchain\\log\\";
 
-    public static final String MAC_LOG_BASEPATH = "/Users/dingsiye/projects/AeroChain/log";
+    public static final String MAC_LOG_BASEPATH = "/Users/dingsiye/projects/AeroChain/log/";
 
     public static List<String> address = new ArrayList<>();
     static {

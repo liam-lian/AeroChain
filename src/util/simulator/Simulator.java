@@ -1,6 +1,7 @@
 package util.simulator;
 
 import com.alibaba.fastjson.JSON;
+import constant.Constant;
 import model.record.Record;
 import node.communication.Sender;
 
@@ -14,7 +15,7 @@ public class Simulator implements Runnable{
 
     public static void init(){
         try {
-            printWriter = new PrintWriter(new BufferedWriter(new OutputStreamWriter(new FileOutputStream("C:\\Users\\DSY\\blockchain\\log\\simulator"), "UTF-8")));
+            printWriter = new PrintWriter(new BufferedWriter(new OutputStreamWriter(new FileOutputStream(Constant.WINDOWS_LOG_BASEPATH), "UTF-8")));
             bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream("simulate.txt"), "UTF-8"));
         } catch (UnsupportedEncodingException | FileNotFoundException e) {
             e.printStackTrace();
